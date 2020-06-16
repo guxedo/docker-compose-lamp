@@ -31,6 +31,10 @@ RUN docker-php-ext-install curl \
 # Enable apache modules
 RUN a2enmod rewrite headers
 
+# install mongo php driver
+RUN apt-get update && apt-get install -y libssl-dev
+RUN pecl install mongo
+
 EXPOSE 80
 
 ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
